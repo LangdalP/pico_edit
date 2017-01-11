@@ -181,9 +181,36 @@ a:hover, a:active {
   overflow: auto;
   border-right: 1px solid #DCE0E3;
 }
+
+#ovase-specific {
+  width: 250px;
+  height: 100px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  border-bottom: 1px solid #DCE0E3;
+}
+
+#ovase-specific a {
+}
+
+#ovase-specific img {
+  width: 90px;
+  height: 90px;
+  float: left;
+  margin-right: 1em;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.ovase-help-text {
+  padding-right: 1em;
+}
+
 #sidebar .controls {
   position: fixed;
-  top: 0;
+  top: 101px;
   left: 0;
   z-index: 90;
   width: 230px;

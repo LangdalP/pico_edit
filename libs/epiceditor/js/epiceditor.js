@@ -1869,6 +1869,7 @@ var block = {
   blockquote: /^( *>[^\n]+(\n[^\n]+)*\n*)+/,
   list: /^( *)(bull) [\s\S]+?(?:hr|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
   html: /^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,
+  picometa: /---\n((.*\n)*)---\n/,
   def: /^ *\[([^\]]+)\]: *([^\s]+)(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
   table: noop,
   paragraph: /^([^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+\n*/,
@@ -2006,6 +2007,16 @@ Lexer.prototype.token = function(src, top) {
           type: 'space'
         });
       }
+    }
+
+    // picometa
+    if (cap = this.rules.picometa.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: "picometa",
+        text: cap[1]
+      });
+      continue;
     }
 
     // code
@@ -2474,6 +2485,7 @@ InlineLexer.prototype.output = function(src) {
 
     // em
     if (cap = this.rules.em.exec(src)) {
+      console.log("Found something that gives em!")
       src = src.substring(cap[0].length);
       out += '<em>'
         + this.output(cap[2] || cap[1])
@@ -2607,6 +2619,9 @@ Parser.prototype.parse = function(src) {
     out += this.tok();
   }
 
+  // Hack so that images get the correct URL in preview
+  out = out.replace("%base_url%/", "");
+
   return out;
 };
 
@@ -2683,6 +2698,12 @@ Parser.prototype.tok = function() {
         + '>'
         + this.token.text
         + '</code></pre>\n';
+    }
+    case 'picometa': {
+      // return '<span style="color: #b766a2; font-size: 0.9em;">\n'
+      return '<span id="picometa">\n'
+        + this.token.text
+        + '</span>\n';
     }
     case 'table': {
       var body = ''
