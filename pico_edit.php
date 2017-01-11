@@ -523,13 +523,32 @@ final class Pico_Edit extends AbstractPicoPlugin {
     die(json_encode($output));
   }
 
+  // By user Addramyr: http://stackoverflow.com/questions/11613840/remove-all-files-folders-and-their-subfolders-with-php
+  static function RecursiveRemove($dir) {
+    $structure = glob(rtrim($dir, "/").'/*');
+    if (is_array($structure)) {
+        foreach($structure as $file) {
+            if (is_dir($file)) Pico_Edit::RecursiveRemove($file);
+            elseif (is_file($file)) unlink($file);
+        }
+    }
+    rmdir($dir);
+  }
+
    private function do_clearcache()
    {
-     if(!isset($_SESSION['backend_logged_in']) || !$_SESSION['backend_logged_in']) die(json_encode(array('error' => 'Error: Unathorized')));
-     $path = $this->getConfig( 'content_dir' ).'/../cache/*';
-     $ret = `rm -rf $path`;
-     // done
-     die($ret);
+      if(!isset($_SESSION['backend_logged_in']) || !$_SESSION['backend_logged_in']) die(json_encode(array('error' => 'Error: Unathorized')));
+      $path = $this->getConfig( 'content_dir' ).'/../twig-cache';
+      error_log($path);
+      $results = scandir($path);
+      foreach ($results as $result) {
+        if ($result === '.' or $result === '..') continue;
+        if (is_dir($path . '/' . $result)) {
+          Pico_Edit::RecursiveRemove($path . '/' . $result);
+        }
+      }
+      // done
+      die();
    }
 
   private function slugify( $text ) {
