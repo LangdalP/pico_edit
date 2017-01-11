@@ -1,4 +1,4 @@
-Pico_edit modified for Ovase.no
+Note: This version of Pico edit has been modified for Ovase.no
 ===========================================
 
 Pico edit - An admin interface for Pico CMS
