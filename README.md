@@ -1,3 +1,6 @@
+Pico_edit modified for Ovase.no
+===========================================
+
 Pico edit - An admin interface for Pico CMS
 ===========================================
 
