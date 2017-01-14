@@ -1,7 +1,7 @@
 {
     "name": "pedervl/pico_edit",
     "description": "A pico_edit fork for Ovase.no",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "version": "1.0.1",
     "authors": [
