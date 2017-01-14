@@ -1,2 +1,2 @@
-# Avoid accidentally committing secret
-config.php
+# In case we will need any dependencies
+vendor/

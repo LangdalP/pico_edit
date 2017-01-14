@@ -1,0 +1,15 @@
+{
+    "name": "pedervl/pico_edit",
+    "description": "A pico_edit fork for Ovase.no",
+    "type": "project",
+    "license": "MIT",
+    "version": "1.0.1",
+    "authors": [
+        {
+            "name": "Peder Voldnes Langdal",
+            "email": "peder.langdal@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
