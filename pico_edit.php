@@ -538,7 +538,7 @@ final class Pico_Edit extends AbstractPicoPlugin {
    private function do_clearcache()
    {
       if(!isset($_SESSION['backend_logged_in']) || !$_SESSION['backend_logged_in']) die(json_encode(array('error' => 'Error: Unathorized')));
-      $path = $this->getConfig( 'content_dir' ).'/../twig-cache';
+      $path = $this->getConfig( 'content_dir' ).'../twig-cache';
       error_log($path);
       $results = scandir($path);
       foreach ($results as $result) {
